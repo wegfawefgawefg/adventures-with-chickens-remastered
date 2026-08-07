@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#030609">
+  <meta name="description" content="Play Adventures with Chickens Remastered in your browser.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; media-src 'self'; connect-src 'self'; style-src 'self'; script-src 'self' 'wasm-unsafe-eval'; object-src 'none'; base-uri 'none'">
+  <title>Adventures with Chickens Remastered</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="bar">
+    <div class="identity">
+      <span class="signal" aria-hidden="true"></span>
+      <span><strong>ADVENTURES WITH CHICKENS</strong><small>1998 / REMASTERED</small></span>
+    </div>
+    <div class="actions">
+      <span id="status">LOADING GAME…</span>
+      <button id="fullscreen" type="button">FULLSCREEN</button>
+      <a href="https://github.com/wegfawefgawefg/adventures-with-chickens-remastered" rel="noopener noreferrer">SOURCE ↗</a>
+    </div>
+  </header>
+
+  <main class="stage">
+    <section id="runtime-frame" class="runtime-frame" data-state="loading">
+      <canvas id="game-canvas" width="1920" height="1080" tabindex="0"
+              aria-label="Adventures with Chickens game"></canvas>
+      <div id="loading" class="loading" aria-live="polite">
+        <div class="chicken" aria-hidden="true">◆</div>
+        <strong>STARTING ADVENTURE</strong>
+        <span>loading native game and original assets</span>
+      </div>
+      <div id="play-gate" class="play-gate">
+        <span>ADVENTURES WITH</span>
+        <strong>CHICKENS</strong>
+        <small>REMASTERED</small>
+        <button id="play" type="button">▶ PLAY</button>
+        <em>sound starts with the game</em>
+      </div>
+    </section>
+  </main>
+
+  <script src="launcher.js" type="module"></script>
+</body>
+</html>

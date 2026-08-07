@@ -1,0 +1,270 @@
+:root {
+  color-scheme: dark;
+  font-family: "DejaVu Sans Mono", "Liberation Mono", monospace;
+  --ink: #030609;
+  --panel: #091018;
+  --line: #24445a;
+  --text: #e8edf0;
+  --muted: #7890a0;
+  --signal: #f0d900;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+  color: var(--text);
+  background: var(--ink);
+}
+
+button,
+a {
+  color: inherit;
+  font: inherit;
+}
+
+.bar {
+  position: fixed;
+  z-index: 5;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  min-height: 54px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 8px 14px;
+  border-bottom: 1px solid var(--line);
+  background: rgb(3 6 9 / 94%);
+}
+
+.identity,
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.identity > span:last-child {
+  display: grid;
+}
+
+.identity strong {
+  font-size: .72rem;
+  letter-spacing: .05em;
+}
+
+.identity small,
+.actions > span {
+  color: var(--muted);
+  font-size: .56rem;
+  letter-spacing: .08em;
+}
+
+.signal {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--signal);
+  box-shadow: 0 0 12px rgb(240 217 0 / 72%);
+}
+
+.actions button,
+.actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 32px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  font-size: .62rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.actions button:hover,
+.actions a:hover {
+  border-color: #4f7b98;
+  background: #10202d;
+}
+
+.stage {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  padding: 70px 16px 16px;
+  place-items: center;
+  background:
+    radial-gradient(circle at 50% 48%, rgb(36 68 90 / 20%), transparent 52%),
+    #030609;
+}
+
+.runtime-frame {
+  position: relative;
+  display: grid;
+  width: min(1920px, calc((100vh - 86px) * 16 / 9), calc(100vw - 32px));
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  place-items: center;
+  outline: 1px solid var(--line);
+  background: #000;
+  box-shadow: 20px 20px 0 rgb(0 0 0 / 28%);
+}
+
+#game-canvas {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  outline: 0;
+  background: #000;
+}
+
+.loading {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  gap: 9px;
+  color: var(--text);
+  text-align: center;
+  pointer-events: none;
+}
+
+.play-gate {
+  position: absolute;
+  z-index: 3;
+  display: none;
+  place-items: center;
+  gap: 2px;
+  text-align: center;
+}
+
+.play-gate > span {
+  color: var(--muted);
+  font-size: clamp(.7rem, 1.2vw, 1rem);
+  letter-spacing: .36em;
+}
+
+.play-gate > strong {
+  color: #f2ead2;
+  font-size: clamp(2.6rem, 7vw, 7rem);
+  letter-spacing: .05em;
+  text-shadow: 5px 5px 0 #29313a;
+}
+
+.play-gate > small {
+  color: var(--signal);
+  font-size: clamp(.65rem, 1vw, .9rem);
+  letter-spacing: .48em;
+}
+
+.play-gate button {
+  min-width: 180px;
+  min-height: 52px;
+  margin-top: 30px;
+  border: 1px solid #7e8e9a;
+  color: var(--ink);
+  background: var(--signal);
+  font: 700 1rem/1 "DejaVu Sans Mono", monospace;
+  letter-spacing: .12em;
+  cursor: pointer;
+}
+
+.play-gate button:hover {
+  background: #fff166;
+}
+
+.play-gate em {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: .58rem;
+  font-style: normal;
+}
+
+.loading strong {
+  font-size: clamp(.8rem, 1.5vw, 1.1rem);
+  letter-spacing: .16em;
+}
+
+.loading span {
+  color: var(--muted);
+  font-size: .62rem;
+}
+
+.chicken {
+  color: var(--signal);
+  font-size: 1.8rem;
+  animation: bob 800ms steps(2, end) infinite;
+}
+
+.runtime-frame[data-state="running"] .loading {
+  display: none;
+}
+
+.runtime-frame[data-state="ready"] .loading {
+  display: none;
+}
+
+.runtime-frame[data-state="ready"] .play-gate {
+  display: grid;
+}
+
+.runtime-frame[data-state="error"] .loading .chicken {
+  color: #e66b54;
+  animation: none;
+}
+
+.runtime-frame:fullscreen {
+  width: 100vw;
+  height: 100vh;
+  aspect-ratio: auto;
+  outline: 0;
+  box-shadow: none;
+}
+
+.runtime-frame:fullscreen #game-canvas {
+  width: min(100vw, calc(100vh * 16 / 9));
+  height: min(100vh, calc(100vw * 9 / 16));
+}
+
+@keyframes bob {
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@media (max-width: 820px) {
+  .identity small,
+  .actions > span,
+  .actions a {
+    display: none;
+  }
+
+  .bar {
+    gap: 6px;
+  }
+
+  .actions {
+    gap: 5px;
+  }
+
+  .stage {
+    padding: 66px 6px 6px;
+  }
+
+  .runtime-frame {
+    width: min(calc((100vh - 72px) * 16 / 9), calc(100vw - 12px));
+  }
+}
