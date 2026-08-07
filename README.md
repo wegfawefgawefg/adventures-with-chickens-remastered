@@ -26,6 +26,13 @@ The source expects the original asset tree at `assets/` when building. Those fil
 not offered by this repository. You are responsible for supplying only material you
 have the right to use.
 
+## Source layout
+
+- `src/` contains the native and browser game implementation;
+- `site/` contains the browser shell, without generated game or asset bundles;
+- `scripts/` contains local native/web build helpers;
+- `CMakeLists.txt` and `CMakePresets.json` define the C++ build.
+
 ## License boundary
 
 The reverse-engineered source code in this repository is available under the MIT
