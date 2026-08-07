@@ -1,30 +1,22 @@
 # Adventures with Chickens Remastered
 
-This repository is the public source-code mirror for a clean C++20 reimplementation of
+This repository contains the source code for a clean C++20 reimplementation of
 RockSolid Software's 1998 Windows game *Adventures with Chickens*.
 
-Play the authorized browser build at
+Play it in your browser at
 [adventures-with-chickens.pages.dev](https://adventures-with-chickens.pages.dev).
 
-## Source-only mirror
+## Assets
 
-This repository contains the reverse-engineered implementation, build configuration,
-and browser-shell source. It intentionally does **not** contain the original graphics,
-sound, music, or level data, and is therefore not a self-contained game distribution.
-
-Development happens in a private canonical repository that holds the authorized asset
-set. This public tree is rebuilt automatically from an explicit source allowlist; do not
-expect direct commits here to survive the next sync.
+The original graphics, sound, music, and level data are intentionally not included in
+this repository. The source expects those files beneath `assets/` when building, so this
+repository does not produce a complete game build on its own.
 
 ## Architecture
 
 The game uses plain C++20, SDL3, direct mode/submode switches, a 60 Hz fixed simulation
 step, and presentation up to 144 Hz. The implementation is native widescreen rather than
 an emulator or a scaled 640x480 framebuffer.
-
-The source expects the original asset tree at `assets/` when building. Those files are
-not offered by this repository. You are responsible for supplying only material you
-have the right to use.
 
 ## Source layout
 
